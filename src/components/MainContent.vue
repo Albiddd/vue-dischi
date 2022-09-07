@@ -1,6 +1,9 @@
 <template>
   <div class="container text-center">
-    <div class="card-wrapper">
+    <div v-if="loading">
+        <LoadingPage/>    
+    </div>
+    <div v-else class="card-wrapper">
       <CardComponent v-for="(disc, i) in discs" :key="i" 
       :poster="disc.poster" 
       :album="disc.title"
@@ -15,14 +18,16 @@
 <script>
 import CardComponent from './CardComponent.vue';
 import axios from 'axios';
+import LoadingPage from './LoadingPage.vue';
 
 export default {
     name: "MainContent",
-    components: { CardComponent },
+    components: { CardComponent, LoadingPage },
     props: {},
     data(){
       return{
-        discs:[]
+        discs:[],
+        loading: false,
       }
     },
     created(){
@@ -32,6 +37,10 @@ export default {
           console.log(res.data.response);
           this.discs = res.data.response;
         })
+        .catch(()=> {
+
+        })
+        .finally(()=>(this.loading = false))
     }
 }
 </script>
