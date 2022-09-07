@@ -31,6 +31,7 @@ export default {
       }
     },
     created(){
+      this.loading = true;
       axios
         .get('https://flynn.boolean.careers/exercises/api/array/music')
         .then((res)=> {
@@ -56,6 +57,6 @@ export default {
     gap: 40px;
     margin-top: 60px;
   }
-  
+
 
 </style>

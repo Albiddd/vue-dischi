@@ -40,9 +40,9 @@
 
     .card{
         background-color: $light-bg;
-        color: white;
         border-radius: 0px;
         height: 420px;
+        color: white;
         .card-text{
             opacity: 0.3;
         }
