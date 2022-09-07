@@ -19,6 +19,11 @@
 </script>
 
 <style lang="scss">
-  @import './styles/general.scss'
+
+  #app {
+    width: 100%;
+    height: 100vh;
+    background-color: #1E2D3B;
+  }
 
 </style>

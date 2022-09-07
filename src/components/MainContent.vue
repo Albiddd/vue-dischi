@@ -1,19 +1,51 @@
 <template>
-  <div class="container">
-    <CardComponent/>
+  <div class="container text-center">
+    <div class="card-wrapper">
+      <CardComponent v-for="(disc, i) in discs" :key="i" 
+      :poster="disc.poster" 
+      :album="disc.title"
+      :author="disc.author" 
+      :genre="disc.genre"
+      :year="disc.year"/>
+
+    </div>
   </div>
 </template>
 
 <script>
 import CardComponent from './CardComponent.vue';
+import axios from 'axios';
+
 export default {
     name: "MainContent",
     components: { CardComponent },
     props: {},
+    data(){
+      return{
+        discs:[]
+      }
+    },
+    created(){
+      axios
+        .get('https://flynn.boolean.careers/exercises/api/array/music')
+        .then((res)=> {
+          console.log(res.data.response);
+          this.discs = res.data.response;
+        })
+    }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+  @import '../styles/general.scss';
+
+  .card-wrapper{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
 
 </style>
