@@ -4,7 +4,7 @@
         <LoadingPage/>    
     </div>
     <div v-else class="card-wrapper">
-      <CardComponent v-for="(disc, i) in discs" :key="i" 
+      <CardComponent v-for="(disc, i) in filteredDiscs" :key="i" 
       :poster="disc.poster" 
       :album="disc.title"
       :author="disc.author" 
@@ -23,11 +23,32 @@ import LoadingPage from './LoadingPage.vue';
 export default {
     name: "MainContent",
     components: { CardComponent, LoadingPage },
-    props: {},
+    props: {
+      search:{
+        type: String,
+        default:'',
+      }
+    },
     data(){
       return{
         discs:[],
         loading: false,
+      }
+    },
+    computed:{
+      filteredDiscs(){
+        const find = this.search.toLowerCase()
+        if(find === 'all'){
+          return this.discs
+        } else{
+          return this.discs.filter((el)=>{
+            const genre = el.genre.toLowerCase()
+            if(genre.includes(find)){
+              return true
+            }
+            return false
+          })
+        }
       }
     },
     created(){

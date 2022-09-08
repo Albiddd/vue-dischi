@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MainHeader/>
-    <MainContent/>
+    <MainHeader  @selection="onSearch"/>
+    <MainContent :search="searchProp" />
   </div>
 </template>
 
@@ -14,7 +14,18 @@
     components: {
       MainHeader,
       MainContent,
-    }
+    },
+    data(){
+      return{
+        searchProp: '',
+      }
+    },
+    methods:{
+      onSearch(data){
+        this.searchProp = data
+      }
+    },
+    
   }
 </script>
 

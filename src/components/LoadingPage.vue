@@ -23,7 +23,7 @@
         transform: translate(-50%,-50%);
         border: 16px solid #fdfdfd;
         border-radius: 50%;
-        border-top: 16px solid rgba(253, 243, 243, 0.456);
+        border-top: 16px solid transparent;
         width: 120px;
         height: 120px;
         animation: spin 2s linear infinite;
