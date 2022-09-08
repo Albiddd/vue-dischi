@@ -17,13 +17,15 @@
 
 <script>
 import CardComponent from './CardComponent.vue';
-import axios from 'axios';
+// import axios from 'axios';
 import LoadingPage from './LoadingPage.vue';
 
 export default {
     name: "MainContent",
     components: { CardComponent, LoadingPage },
     props: {
+      discs: Array,
+      loading: Boolean,
       search:{
         type: String,
         default:'',
@@ -31,8 +33,6 @@ export default {
     },
     data(){
       return{
-        discs:[],
-        loading: false,
       }
     },
     computed:{
@@ -43,7 +43,8 @@ export default {
         } else{
           return this.discs.filter((el)=>{
             const genre = el.genre.toLowerCase()
-            if(genre.includes(find)){
+            const artist = el.author.toLowerCase()
+            if(genre.includes(find) || artist.includes(find)){
               return true
             }
             return false
@@ -51,19 +52,19 @@ export default {
         }
       }
     },
-    created(){
-      this.loading = true;
-      axios
-        .get('https://flynn.boolean.careers/exercises/api/array/music')
-        .then((res)=> {
-          console.log(res.data.response);
-          this.discs = res.data.response;
-        })
-        .catch(()=> {
+    // created(){
+    //   this.loading = true;
+    //   axios
+    //     .get('https://flynn.boolean.careers/exercises/api/array/music')
+    //     .then((res)=> {
+    //       console.log(res.data.response);
+    //       this.discs = res.data.response;
+    //     })
+    //     .catch(()=> {
 
-        })
-        .finally(()=>(this.loading = false))
-    }
+    //     })
+    //     .finally(()=>(this.loading = false))
+    // }
 }
 </script>
 

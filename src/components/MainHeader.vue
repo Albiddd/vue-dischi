@@ -1,16 +1,25 @@
 <template>
     <header>
         <img src="../assets/logo.svg" alt="">
-        <div class="filter-genre">
+        <div class="filters">
           <!-- <input v-model="search" @keyup.enter="$emit('search', search)" type="text" class="rounded"> -->
           
-          <select name="genre" id="genre" v-model="selected" @change="$emit('selection', selected)">
-            <option value="all">All</option>
-            <option value="Rock">Rock</option>
-            <option value="Pop">Pop</option>
-            <option value="Metal">Metal</option>
-            <option value="Jazz">Jazz</option>
+          <select name="genre" id="genre" v-model="selected" @change="$emit('selectionGenre', selected)">
+            <option value="all">All Genre</option>
+            <option v-for="(genre, index) in genreList" :key="index" 
+            :value="genre">
+              {{genre}}
+            </option> 
           </select> 
+
+          <select name="author" id="author" v-model="selected" @change="$emit('selectionArtist', selected)">
+            <option value="all">All Artists</option>
+            <option v-for="(author, index) in artistsList" :key="index" 
+            :value="author">
+              {{author}}
+            </option> 
+          </select> 
+
 
         </div>
     </header>
@@ -20,7 +29,8 @@
   export default {
     name: 'MainHeader',
     props: {
-      genreList: Array
+      genreList: Array,
+      artistsList: Array
     },
     data(){
       return{
@@ -44,8 +54,11 @@
             padding: 20px;
             width: 200px;
         }
-        .filter-genre{
+        .filters{
           padding: 0 20px;
+          select{
+            margin: 0 10px;
+          }
         }
     }
   
