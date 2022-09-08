@@ -3,7 +3,7 @@
         <img src="../assets/logo.svg" alt="">
         <div class="filters">
           <!-- <input v-model="search" @keyup.enter="$emit('search', search)" type="text" class="rounded"> -->
-          
+          Filter by:
           <select name="genre" id="genre" v-model="selected" @change="$emit('selectionGenre', selected)">
             <option value="all">All Genre</option>
             <option v-for="(genre, index) in genreList" :key="index" 
@@ -11,6 +11,7 @@
               {{genre}}
             </option> 
           </select> 
+          
 
           <select name="author" id="author" v-model="selected" @change="$emit('selectionArtist', selected)">
             <option value="all">All Artists</option>
@@ -56,8 +57,12 @@
         }
         .filters{
           padding: 0 20px;
+          color: white;
+          font-weight: 600;
           select{
             margin: 0 10px;
+            border: none;
+            outline: none;
           }
         }
     }
